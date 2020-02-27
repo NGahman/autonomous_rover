@@ -5,7 +5,8 @@
 //kalmanFilter kalman;
 orientation orient;
 DriveTrain drive;
-echo echo;
+echo echoleft;
+echo echoright;
 coroutine driveCoroutine;
 float rposx = -99999;
 float rposy = -99999;
@@ -16,15 +17,17 @@ void setup() {
   driveCoroutine.setup(1000);
   drive.setup();
   orient.setup();
-  echo.setup();
+  echoleft.setup(6,7);
+  echoright.setup(8,9);
   Serial.begin(9600);
   reset();
 }
 
 void loop() {
   orient.loop();
-  echo.loop();
-  
+  echoleft.loop();
+  echoright.loop();
+  /*
   if (!moveback)
   {
     forwards(100);
@@ -34,17 +37,21 @@ void loop() {
     forwards(-100);
   }
 
-  if (echo.distance < 1)
+  if (echoleft.distance < 100 || echoright.distance < 100)
   {
     moveback = true;
     rposx = orient.position.x();
     rposy = orient.position.y();
     rposz = orient.position.z();
   }
-  while (!(abs(sqrt(rposx*rposx+rposy*rposy+rposz*rposz) - orient.computeMagnitude()) < 1))
+  while (!(abs(sqrt(rposx*rposx+rposy*rposy+rposz*rposz) - orient.computeMagnitude()) < 100))
   {
     moveback = false;
   }
+  */
+  Serial.println(echoleft.distance);
+  Serial.println(echoright.distance);
+  Serial.println();
   delay(10);
 }
 

@@ -2,8 +2,10 @@
 //Echo location functions used for finding objects via sound.
 #include "echo.h"
 
-void echo :: setup() {
+void echo :: setup(int trig, int receive) {
 	//Inputs/Outputs
+	trigPin = trig;
+	receivePin = receive;
 	pinMode(trigPin, OUTPUT);
 	pinMode(receivePin, INPUT);
 
