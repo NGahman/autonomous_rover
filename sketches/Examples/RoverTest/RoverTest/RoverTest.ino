@@ -1,7 +1,7 @@
 #include <DriveTrain.h> //Deals with spinning the wheels of the rover.
+#include <Drive.h>
 #include "coroutine.h"
 
-DriveTrain drive;
 coroutine driveCoroutine;
 coroutine turnCoroutine;
 boolean turnRight = false;
@@ -12,7 +12,7 @@ void setup() {
 
   turnCoroutine.setup(13000);
   driveCoroutine.setup(1000);
-  drive.setup();
+  Driver::setup();
   reset();
   forwards(100);
   Serial.begin(9600);
@@ -90,54 +90,54 @@ void loop() {
 
 void forwards(int speed) {
   // left side
-  drive.spinAt(25, speed);
-  drive.spinAt(21, speed);
-  drive.spinAt(20, speed);
+  Driver::spinAt(25, speed);
+  Driver::spinAt(21, speed);
+  Driver::spinAt(20, speed);
 
   // right side
-  drive.spinAt(27, -speed);
-  drive.spinAt(22, -speed);
-  drive.spinAt(28, -speed);
+  Driver::spinAt(27, -speed);
+  Driver::spinAt(22, -speed);
+  Driver::spinAt(28, -speed);
 }
 
 void Rightspin() {
     // Front
-    drive.moveTo(23, 50);
-    drive.moveTo(29, 50);
+    Driver::moveTo(23, 50);
+    Driver::moveTo(29, 50);
 
     // Back
-    drive.moveTo(24, -50);
-    drive.moveTo(26, -50);
+    Driver::moveTo(24, -50);
+    Driver::moveTo(26, -50);
 }
 
 void Leftspin() {
     // Front
-    drive.moveTo(23, -50);
-    drive.moveTo(29, -50);
+    Driver::moveTo(23, -50);
+    Driver::moveTo(29, -50);
 
     // Back
-    drive.moveTo(24, 50);
-    drive.moveTo(26, 50);
+    Driver::moveTo(24, 50);
+    Driver::moveTo(26, 50);
 }
 
 void reset() {
   /* Turn right */
   // front
-  drive.moveTo(23, 0);
-  drive.moveTo(29, 0);
+  Driver::moveTo(23, 0);
+  Driver::moveTo(29, 0);
 
   // back
-  drive.moveTo(24, 0);
-  drive.moveTo(26, 0);
+  Driver::moveTo(24, 0);
+  Driver::moveTo(26, 0);
 
   if(driveCoroutine.readyState){
       /* Turn Left */
     // front
-    drive.moveTo(23, 0);
-    drive.moveTo(29, 0);
+    Driver::moveTo(23, 0);
+    Driver::moveTo(29, 0);
   
     // back
-    drive.moveTo(24, 0);
-    drive.moveTo(26, 0);
+    Driver::moveTo(24, 0);
+    Driver::moveTo(26, 0);
   }
 }
